@@ -3,6 +3,8 @@
 namespace Alyssa\SimpleErp\StockBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Alyssa\SimpleErp\StockBundle\Entity\Product
@@ -34,6 +36,36 @@ class Product
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
+
+    /**
+     * @var integer $type
+     *
+     * @ORM\ManyToOne(targetEntity="ProductType")
+     * @ORM\JoinColumn(name="product_type_id", referencedColumnName="id")
+     */
+    private $type;
+
+    /**
+     * @var integer $acumulatedStock
+     *
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="product")
+     */
+    private $acumulatedStock;
+
+    /**
+     * @var integer $product
+     *
+     * @ORM\OneToOne(targetEntity="Stock")
+     * @ORM\JoinColumn(name="current_stock_id", referencedColumnName="id")
+     *
+     */
+     private $currentStock;
+
+
+    public function __construct()
+    {
+        $this->acumulatedStock = new ArrayCollection();
+    }
 
 
     /**
@@ -84,5 +116,65 @@ class Product
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Add acumulatedStock
+     *
+     * @param Alyssa\SimpleErp\StockBundle\Entity\Stock $acumulatedStock
+     */
+    public function addStock(\Alyssa\SimpleErp\StockBundle\Entity\Stock $acumulatedStock)
+    {
+        $this->acumulatedStock[] = $acumulatedStock;
+    }
+
+    /**
+     * Get acumulatedStock
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getAcumulatedStock()
+    {
+        return $this->acumulatedStock;
+    }
+
+    /**
+     * Set currentStock
+     *
+     * @param Alyssa\SimpleErp\StockBundle\Entity\Stock $currentStock
+     */
+    public function setCurrentStock(\Alyssa\SimpleErp\StockBundle\Entity\Stock $currentStock)
+    {
+        $this->currentStock = $currentStock;
+    }
+
+    /**
+     * Get currentStock
+     *
+     * @return Alyssa\SimpleErp\StockBundle\Entity\Stock
+     */
+    public function getCurrentStock()
+    {
+        return $this->currentStock;
+    }
+
+    /**
+     * Set type
+     *
+     * @param Alyssa\SimpleErp\StockBundle\Entity\ProductType $type
+     */
+    public function setType(\Alyssa\SimpleErp\StockBundle\Entity\ProductType $type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * Get type
+     *
+     * @return Alyssa\SimpleErp\StockBundle\Entity\ProductType
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
