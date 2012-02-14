@@ -13,7 +13,7 @@ Download bundles
 
 Add the following lines to the file ``deps``::
 
-    [SonataDoctrineORMAdminBundle]
+    [AlyssaSimpleErpStockBundle]
         git=http://github.com/alyssa-labs/AlyssaSimpleErpStockBundle.git
         target=/bundles/Alyssa/SimpleErp/AlyssaSimpleErpStockBundle
 
