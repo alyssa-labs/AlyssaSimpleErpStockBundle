@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 
-class ProductAdmin extends Admin
+class ClientAdmin extends Admin
 {
     protected $formOptions = array(
         'validation_groups' => 'admin'
